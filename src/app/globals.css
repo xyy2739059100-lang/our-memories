@@ -1,0 +1,375 @@
+@import "tailwindcss";
+
+/* ========== 主题配色：小王子水彩风格（对齐首页设计参考图） ========== */
+@theme inline {
+  /* 纸张底色 */
+  --color-cream: #fdf2e2;
+  --color-cream-dark: #f6e8d3;
+
+  /* 浅蓝水彩 */
+  --color-watercolor: #a8c5e8;
+  --color-watercolor-light: #c8dcef;
+  --color-watercolor-dark: #7ba7d4;
+
+  /* 暖金（星星、星环） */
+  --color-gold: #e8b84a;
+  --color-gold-light: #f0cc6e;
+  --color-gold-dark: #c99a32;
+
+  /* 文字暖棕 */
+  --color-brown: #5c4a3a;
+  --color-brown-light: #8b7d6b;
+  --color-brown-lighter: #b3a896;
+
+  /* 玫瑰红点缀 */
+  --color-rose: #d4614a;
+  --color-rose-light: #e88a78;
+
+  /* 星球蓝 */
+  --color-planet: #7ba7d4;
+
+  /* 字体 */
+  --font-serif: var(--font-serif-cn);
+  --font-sans: var(--font-sans-cn);
+
+  /* ========== Apple 质感变量（全站统一圆角 / 磨砂 / 阴影） ========== */
+  /* 圆角：从胶囊到卡片，按视觉层级走 */
+  --radius-chip: 9999px;
+  --radius-lg: 24px;    /* 大胶囊、底部导航容器 */
+  --radius-md: 16px;    /* 常规卡片 */
+  --radius-sm: 12px;    /* 小卡片、按钮 */
+  --radius-xs: 10px;    /* 次级按钮、标签 */
+
+  /* 磨砂玻璃层：参考 iOS 17 liquid glass 轻量版 */
+  --glass-bg: rgba(255, 253, 247, 0.72);
+  --glass-bg-strong: rgba(255, 253, 247, 0.92);
+  --glass-border: rgba(216, 181, 110, 0.28);
+  --glass-blur: 14px;
+
+  /* 阴影：三级，从轻到重（小按钮 / 卡片 / 浮层） */
+  --shadow-soft: 0 2px 10px rgba(120, 95, 60, 0.07);
+  --shadow-card: 0 4px 20px rgba(120, 95, 60, 0.10), 0 1px 3px rgba(120, 95, 60, 0.05);
+  --shadow-pop: 0 10px 30px rgba(120, 95, 60, 0.14), 0 2px 6px rgba(120, 95, 60, 0.08);
+}
+
+/* ========== 基础样式 ========== */
+:root {
+  --background: #fdf2e2;
+  --foreground: #5c4a3a;
+}
+
+html,
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* ========== 纸张纹理背景 ========== */
+.paper-texture {
+  background-color: #fdf2e2;
+  background-image:
+    radial-gradient(circle at 18% 22%, rgba(232, 184, 74, 0.05) 0%, transparent 46%),
+    radial-gradient(circle at 82% 72%, rgba(168, 197, 232, 0.06) 0%, transparent 48%),
+    radial-gradient(circle at 50% 50%, rgba(92, 74, 58, 0.02) 0%, transparent 72%);
+}
+
+/* ========== 手写字体（手账内页） ========== */
+.font-hand {
+  font-family: "KaiTi", "STKaiti", "楷体", "Kaiti SC", var(--font-serif-cn), serif;
+  font-feature-settings: "palt";
+}
+
+/* 纸面颗粒：一层极淡的静态噪声，把整页"压"在同一张纸上 */
+.paper-grain {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='180' height='180' filter='url(%23g)' opacity='0.32'/></svg>");
+  background-size: 180px 180px;
+  mix-blend-mode: multiply;
+  opacity: 0.35;
+}
+
+/* ========== 纸张模板叠层（横线 / 方格 / 牛皮纸噪点） ========== */
+.paper-lines {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 24px,
+      rgba(140, 100, 60, 0.16) 24px,
+      rgba(140, 100, 60, 0.16) 25px
+    );
+}
+.paper-lines-ruled {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 24px,
+      rgba(140, 100, 60, 0.16) 24px,
+      rgba(140, 100, 60, 0.16) 25px
+    ),
+    linear-gradient(90deg, rgba(200, 80, 80, 0.22) 0, rgba(200, 80, 80, 0.22) 1.2%, transparent 1.2%);
+}
+.paper-grid {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 22px,
+      rgba(140, 100, 60, 0.13) 22px,
+      rgba(140, 100, 60, 0.13) 23px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 22px,
+      rgba(140, 100, 60, 0.13) 22px,
+      rgba(140, 100, 60, 0.13) 23px
+    );
+}
+/* 牛皮纸更粗的纤维噪点（两层叠加，baseFrequency 不同） */
+.paper-kraft-grain {
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='300' height='300' filter='url(%23g)' opacity='0.35'/></svg>"),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='140' height='140' filter='url(%23g)' opacity='0.22'/></svg>");
+  background-size: 300px 300px, 140px 140px;
+  mix-blend-mode: multiply;
+  opacity: 0.7;
+}
+
+/* 水彩晕染效果 */
+.watercolor-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* 触控最小热区：视觉尺寸不变，手指实际可点范围扩到约 44px */
+.tap-expand {
+  position: relative;
+}
+@media (hover: none) {
+  .tap-expand::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: inherit;
+  }
+}
+
+/* ========== 滚动条美化 ========== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(92, 74, 58, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(92, 74, 58, 0.35);
+}
+
+/* 选中文本颜色 */
+::selection {
+  background: rgba(232, 184, 74, 0.3);
+  color: #5c4a3a;
+}
+
+/* ========== 首页：星球上的小王子与玫瑰 ========== */
+/* 2D SVG 覆盖层，锚定在球体上缘，坐标按 540px 画布换算 */
+.planet-prince,
+.planet-rose {
+  position: absolute;
+  z-index: 4;
+  transform: translate(-50%, -100%);
+  transform-origin: 50% 100%;
+}
+
+.planet-prince {
+  left: 55%;
+  top: 15.4%;
+  width: 23.5%;
+  animation: prince-bob 7.5s ease-in-out infinite;
+}
+
+.planet-rose {
+  left: 40.2%;
+  top: 13%;
+  width: 12.5%;
+  animation: prince-bob 9s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+.planet-prince img,
+.planet-rose img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@keyframes prince-bob {
+  0%,
+  100% {
+    margin-top: 0;
+  }
+  50% {
+    margin-top: -2px;
+  }
+}
+
+/* 点击星光反馈 */
+@keyframes burst-glow {
+  0% {
+    opacity: 0.9;
+    transform: scale(0.35);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+@keyframes burst-ring {
+  0% {
+    opacity: 0.85;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.35);
+  }
+}
+
+@keyframes burst-star {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx, 0px), var(--ty, 0px));
+  }
+}
+
+/* 星光以球体视觉中心为原点（3D 画布正中） */
+.planet-burst {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.planet-burst-glow {
+  position: absolute;
+  left: -110px;
+  top: -110px;
+  width: 220px;
+  height: 220px;
+  border-radius: 9999px;
+  opacity: 0;
+  background: radial-gradient(
+    circle,
+    rgba(240, 204, 110, 0.55) 0%,
+    rgba(240, 204, 110, 0.14) 45%,
+    rgba(240, 204, 110, 0) 70%
+  );
+  animation: burst-glow 1100ms ease-out forwards;
+}
+
+.planet-burst-ring {
+  position: absolute;
+  left: -70px;
+  top: -70px;
+  width: 140px;
+  height: 140px;
+  border-radius: 9999px;
+  opacity: 0;
+  border: 1.5px solid rgba(216, 181, 110, 0.85);
+  animation: burst-ring 1100ms ease-out forwards;
+}
+
+.planet-burst-star {
+  position: absolute;
+  left: -3px;
+  top: -3px;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  opacity: 0;
+  background: #f0cc6e;
+  box-shadow: 0 0 10px rgba(240, 204, 110, 0.9);
+  animation: burst-star 1100ms ease-out forwards;
+}
+
+/* ========== 地图页：旅行列表抽屉 / 手账详情卡入场 ========== */
+/* 右侧缩放组：手机上落到右下角（避开金色城市标记），桌面上竖直居中 */
+.map-zoom-stack {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .map-zoom-stack {
+    top: 50%;
+    bottom: auto;
+    right: 1.75rem;
+    transform: translateY(-50%);
+  }
+}
+
+
+@keyframes drawer-in {
+  from {
+    opacity: 0;
+    transform: translateX(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.drawer-in {
+  animation: drawer-in 260ms ease-out both;
+}
+
+@keyframes card-show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.card-show {
+  animation: card-show 260ms ease-out both;
+}
+
+/* ========== 尊重系统减少动态效果设置 ========== */
+@media (prefers-reduced-motion: reduce) {
+  .planet-prince,
+  .planet-rose,
+  .planet-burst-glow,
+  .planet-burst-ring,
+  .planet-burst-star,
+  .drawer-in,
+  .card-show {
+    animation: none !important;
+  }
+}

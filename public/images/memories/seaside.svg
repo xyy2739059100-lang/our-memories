@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="海边的午后水彩插画">
+  <defs>
+    <linearGradient id="ss-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c9def2" />
+      <stop offset="0.55" stop-color="#e7f1f9" />
+      <stop offset="1" stop-color="#f9fbfd" />
+    </linearGradient>
+    <linearGradient id="ss-sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8fb9dd" />
+      <stop offset="1" stop-color="#548cba" />
+    </linearGradient>
+    <linearGradient id="ss-mt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a9bfd2" />
+      <stop offset="1" stop-color="#d3dfe8" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#ss-sky)" />
+  <circle cx="610" cy="140" r="80" fill="#ffe9b8" opacity="0.22" />
+  <circle cx="610" cy="140" r="44" fill="#ffeec7" opacity="0.9" />
+  <path d="M0 340 L170 205 L318 305 L462 188 L648 312 L800 238 L800 370 L0 370 Z" fill="url(#ss-mt)" opacity="0.9" />
+  <rect y="358" width="800" height="242" fill="url(#ss-sea)" opacity="0.92" />
+  <path d="M0 415 Q200 396 400 420 T800 410" stroke="#e3eefa" stroke-width="3" fill="none" opacity="0.7" />
+  <path d="M0 470 Q220 452 440 476 T800 464" stroke="#e3eefa" stroke-width="4" fill="none" opacity="0.55" />
+  <path d="M0 525 Q240 508 480 530 T800 520" stroke="#e3eefa" stroke-width="5" fill="none" opacity="0.4" />
+  <ellipse cx="150" cy="300" rx="110" ry="42" fill="#f3f8fc" opacity="0.55" />
+  <ellipse cx="640" cy="270" rx="130" ry="46" fill="#f3f8fc" opacity="0.45" />
+</svg>

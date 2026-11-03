@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="山间清晨水彩插画">
+  <defs>
+    <linearGradient id="ml-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#dceaf5" />
+      <stop offset="1" stop-color="#f6fbfd" />
+    </linearGradient>
+    <linearGradient id="ml-mt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6f93b0" />
+      <stop offset="1" stop-color="#a8c3d6" />
+    </linearGradient>
+    <linearGradient id="ml-lake" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9dc2da" />
+      <stop offset="1" stop-color="#6f9cbd" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#ml-sky)" />
+  <circle cx="180" cy="120" r="46" fill="#ffeec7" opacity="0.75" />
+  <path d="M0 330 L160 170 L300 300 L400 210 L520 300 L640 190 L800 320 L800 360 L0 360 Z" fill="url(#ml-mt)" opacity="0.85" />
+  <rect y="350" width="800" height="250" fill="url(#ml-lake)" opacity="0.9" />
+  <path d="M0 402 Q200 386 400 404 T800 396" stroke="#e6f1f8" stroke-width="3" fill="none" opacity="0.65" />
+  <path d="M0 466 Q220 450 440 470 T800 460" stroke="#e6f1f8" stroke-width="4" fill="none" opacity="0.5" />
+  <path d="M160 360 L300 360 L250 480 L200 470 Z" fill="#8aa9c0" opacity="0.28" />
+  <path d="M640 360 L800 360 L760 470 L690 460 Z" fill="#8aa9c0" opacity="0.24" />
+  <ellipse cx="470" cy="240" rx="120" ry="30" fill="#f7fbfd" opacity="0.6" />
+  <ellipse cx="120" cy="260" rx="90" ry="26" fill="#f7fbfd" opacity="0.5" />
+</svg>

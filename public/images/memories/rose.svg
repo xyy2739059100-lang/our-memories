@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="玻璃罩里的玫瑰水彩插画">
+  <defs>
+    <radialGradient id="ro-bg" cx="0.42" cy="0.35" r="0.8">
+      <stop offset="0" stop-color="#fffaf3" />
+      <stop offset="1" stop-color="#f1e5d5" />
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#ro-bg)" />
+  <ellipse cx="400" cy="492" rx="170" ry="38" fill="#e9dcc8" opacity="0.6" />
+  <path d="M400 470 C392 400 404 350 398 290" stroke="#7f9b72" stroke-width="9" fill="none" />
+  <path d="M398 360 C348 350 328 318 346 298 C372 306 392 330 398 348 Z" fill="#93ad84" />
+  <path d="M400 408 C448 400 472 372 458 348 C430 356 410 380 400 400 Z" fill="#a4bd94" />
+  <circle cx="398" cy="258" r="54" fill="#c9573f" />
+  <circle cx="398" cy="258" r="40" fill="#d96a52" />
+  <circle cx="398" cy="258" r="26" fill="#e3846f" />
+  <circle cx="398" cy="258" r="13" fill="#f0a894" />
+  <ellipse cx="356" cy="232" rx="26" ry="16" fill="#cf5f47" transform="rotate(-24 356 232)" />
+  <ellipse cx="440" cy="232" rx="26" ry="16" fill="#cf5f47" transform="rotate(24 440 232)" />
+  <ellipse cx="398" cy="296" rx="30" ry="16" fill="#c65441" />
+  <path d="M300 520 Q300 300 400 280 Q500 300 500 520" stroke="#cfe0ea" stroke-width="3" fill="none" opacity="0.75" />
+  <ellipse cx="400" cy="520" rx="100" ry="18" fill="#cfe0ea" opacity="0.25" />
+</svg>
