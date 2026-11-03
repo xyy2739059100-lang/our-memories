@@ -47,6 +47,39 @@ function writeLocal(kind: SyncKind, payload: unknown): boolean {
   }
 }
 
+function notifyFailure() {
+  if (typeof document === "undefined") return;
+  const id = "om-sync-error";
+  let node = document.getElementById(id);
+  if (!node) {
+    node = document.createElement("div");
+    node.id = id;
+    node.style.cssText = [
+      "position:fixed",
+      "left:50%",
+      "bottom:92px",
+      "transform:translateX(-50%)",
+      "z-index:9999",
+      "max-width:86vw",
+      "padding:10px 16px",
+      "border-radius:14px",
+      "background:rgba(60,40,30,.92)",
+      "color:#fff8ef",
+      "font-size:13px",
+      "line-height:1.5",
+      "box-shadow:0 8px 24px rgba(0,0,0,.18)",
+      "transition:opacity .3s",
+    ].join(";");
+    document.body.appendChild(node);
+  }
+  node.textContent = "云端保存失败，改动只存在这台设备上";
+  node.style.opacity = "1";
+  window.setTimeout(() => {
+    const target = document.getElementById(id);
+    if (target) target.style.opacity = "0";
+  }, 6000);
+}
+
 async function send(kind: SyncKind, payload: unknown): Promise<boolean> {
   try {
     const response = await fetch(`/api/data/${kind}`, {
@@ -58,12 +91,17 @@ async function send(kind: SyncKind, payload: unknown): Promise<boolean> {
     });
     if (response.status === 401) {
       authState = "off";
+      notifyFailure();
       return false;
     }
-    if (!response.ok) return false;
+    if (!response.ok) {
+      notifyFailure();
+      return false;
+    }
     authState = "on";
     return true;
   } catch {
+    notifyFailure();
     return false;
   }
 }
