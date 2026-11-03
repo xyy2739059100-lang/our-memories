@@ -59,3 +59,7 @@ next-env.d.ts
 
 # local deploy bundle
 our-memories-deploy.zip
+
+# local push helper (never commit)
+/push-via-api.ps1
+/deploy-github.ps1
