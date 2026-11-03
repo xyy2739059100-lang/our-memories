@@ -5,8 +5,6 @@
 import { NextResponse } from "next/server";
 import { usesCloudStore } from "@/lib/server/store";
 
-export const dynamic = "force-dynamic";
-
 function maskSecret(): string {
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim() ?? "";
   if (!key) return "missing";
