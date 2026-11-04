@@ -23,6 +23,12 @@ let authState: "unknown" | "on" | "off" = "unknown";
 const pending = new Map<SyncKind, unknown>();
 const timers = new Map<SyncKind, ReturnType<typeof setTimeout>>();
 
+/**
+ * 页面挂载时会先 hydrate 一次状态，紧接着自动保存定时器就会触发。
+ * 这次「回写」不是用户改动，必须丢掉，否则打开页面的设备会用本机旧数据覆盖云端。
+ */
+const inhibitUntil = new Map<SyncKind, number>();
+
 function readLocal(kind: SyncKind): CloudEnvelope | null {
   if (typeof window === "undefined") return null;
   try {
@@ -99,6 +105,15 @@ async function send(kind: SyncKind, payload: unknown): Promise<boolean> {
       return false;
     }
     authState = "on";
+    // 以服务端时间戳为准，避免两台设备时钟不一致时判断错「谁更新」
+    try {
+      const echoed = (await response.json()) as { savedAt?: unknown } | null;
+      if (echoed && typeof echoed.savedAt === "number" && payload && typeof payload === "object") {
+        writeLocal(kind, { ...(payload as Record<string, unknown>), savedAt: echoed.savedAt });
+      }
+    } catch {
+      /* 回写时间戳失败不影响本次保存 */
+    }
     return true;
   } catch {
     notifyFailure();
@@ -109,6 +124,8 @@ async function send(kind: SyncKind, payload: unknown): Promise<boolean> {
 /** 改动后排队上传：短时间内的连续改动只推最后一份 */
 export function queuePush(kind: SyncKind, payload: unknown) {
   if (typeof window === "undefined" || authState === "off") return;
+  // 挂载后的那次自动保存不是用户改动，跳过
+  if ((inhibitUntil.get(kind) ?? 0) > Date.now()) return;
 
   pending.set(kind, payload);
   const timer = timers.get(kind);
@@ -158,6 +175,8 @@ export async function syncKindFromCloud(kind: SyncKind): Promise<boolean> {
 
   const remote = await pullCloud(kind);
   const local = readLocal(kind);
+  // 拉取结束后 2 秒内到来的保存是挂载回写，不是用户改动
+  inhibitUntil.set(kind, Date.now() + 2000);
 
   if (!remote) {
     // 云端还是空的：把本机已有的内容搬上去（第一次登录时用）
